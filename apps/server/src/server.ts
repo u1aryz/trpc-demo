@@ -43,6 +43,7 @@ const appRouter = t.router({
 
 export type AppRouter = typeof appRouter
 
+const port = 4000
 const app = express()
 app.use(morgan('combined'))
 app.use(
@@ -52,4 +53,4 @@ app.use(
     createContext,
   }),
 )
-app.listen(4000, () => console.log('started server on 4000 port.'))
+app.listen(port, () => console.log(`started server on ${port} port, url: http://localhost:${port}`))
