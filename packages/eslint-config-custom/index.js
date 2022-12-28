@@ -1,5 +1,5 @@
 module.exports = {
-  plugins: ['prettier'],
+  plugins: ['prettier', 'unused-imports'],
   extends: ['next', 'turbo', 'prettier'],
   rules: {
     '@next/next/no-html-link-for-pages': 'off',
@@ -15,5 +15,6 @@ module.exports = {
         semi: false,
       },
     ],
+    'unused-imports/no-unused-imports': 'error',
   },
 }
