@@ -1,4 +1,4 @@
-import { inferAsyncReturnType, initTRPC } from '@trpc/server'
+import { initTRPC } from '@trpc/server'
 import * as trpcExpress from '@trpc/server/adapters/express'
 import express from 'express'
 import morgan from 'morgan'
@@ -16,9 +16,7 @@ const userList: User[] = [
   },
 ]
 
-const createContext = ({ req, res }: trpcExpress.CreateExpressContextOptions) => ({})
-type Context = inferAsyncReturnType<typeof createContext>
-const t = initTRPC.context<Context>().create()
+const t = initTRPC.create()
 const appRouter = t.router({
   userById: t.procedure
     .input((val: unknown) => {
@@ -50,7 +48,6 @@ app.use(
   '/trpc',
   trpcExpress.createExpressMiddleware({
     router: appRouter,
-    createContext,
   }),
 )
 app.listen(port, () => console.log(`started server on ${port} port, url: http://localhost:${port}`))
