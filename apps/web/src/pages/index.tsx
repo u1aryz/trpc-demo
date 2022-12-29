@@ -1,10 +1,13 @@
-import { Button } from 'ui'
+import { trpc } from 'utils/trpc'
 
-export default function Web() {
+export default function IndexPage() {
+  const hello = trpc.hello.useQuery({ text: 'client' })
+  if (!hello.data) {
+    return <div>Loading...</div>
+  }
   return (
     <div>
-      <h1>Web</h1>
-      <Button />
+      <p>{hello.data.greeting}</p>
     </div>
   )
 }
